@@ -13,15 +13,3 @@ class Pokemon():
         print("Vida restante:", target.life)
         if target.life == 0:
             print(target.name, "foi nocauteado!!!")
-
-class Atack():
-    def __init__(self, name:str, type:str, dammage):
-        self.name = name
-        self.type = type
-        self.dammage = dammage
-        
-class Trainer():
-    def __init__(self, name:"str", bag:dict, pokemons:dict):
-        self.name = name
-        self.bag = {}
-        self.pokemons = {}
