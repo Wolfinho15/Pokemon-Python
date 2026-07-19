@@ -17,8 +17,7 @@ class Battle_config():
     
     def start_battle(self):
 
-        x = 0
-        self.adversary_pokemon = self.adversary_trainer.pokemons[x]
+        self.adversary_pokemon = self.adversary_trainer.pokemons[0]
         while len(self.player.pokemons) != 0 and len(self.adversary_trainer.pokemons) != 0:
             print("Escolha qual pokemon irá batalhar:")
             for indice, pokemon in enumerate(self.player.pokemons):
@@ -29,21 +28,24 @@ class Battle_config():
             
             ##Loop da batalha
             while self.adversary_pokemon.life > 0 and self.player_pokemon.life > 0:
-                if self.player_pokemon.life > 0:
-                    print("Escolha seu ataque:")
-                    self.player_pokemon.listar_ataques()
-                    indice = int(input("Escolha:"))
-                    self.player_pokemon.use_attack(indice, self.adversary_pokemon)
+                print("Escolha seu ataque:")
+                self.player_pokemon.listar_ataques()
+                indice = int(input("Escolha:"))
+                self.player_pokemon.use_attack(indice, self.adversary_pokemon)
                     
-                if self.adversary_pokemon.life > 0:
-                    indice = random.randint(0, len(self.adversary_pokemon.attacks) - 1)
-                    self.adversary_pokemon.use_attack(indice, self.player_pokemon)
-                    if self.player_pokemon.life <= 0:
-                        self.player.pokemons.pop(escolha)
-                else:
-                    self.adversary_trainer.pokemons.pop(x)
-                    self.adversary_pokemon = self.adversary_trainer.pokemons[x]
-                    print(self.adversary_trainer.name, "escolheu", self.adversary_pokemon.name)
+                if self.adversary_pokemon.life <= 0:
+                    self.adversary_trainer.pokemons.pop(0)
+                    if len(self.adversary_trainer.pokemons) > 0:
+                        self.adversary_pokemon = self.adversary_trainer.pokemons[0]
+                        print(self.adversary_trainer.name, "escolheu", self.adversary_pokemon.name)
+                    break
+                
+                indice = random.randint(0, len(self.adversary_pokemon.attacks) - 1)
+                self.adversary_pokemon.use_attack(indice, self.player_pokemon)
+                if self.player_pokemon.life <= 0:
+                        self.player.pokemons.remove(self.player_pokemon)
+
+                
         if len(self.player.pokemons) == 0:
             print("Você foi derrotado")
         elif len(self.adversary_trainer.pokemons) == 0:
