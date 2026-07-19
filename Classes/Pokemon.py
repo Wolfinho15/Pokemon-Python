@@ -5,6 +5,9 @@ class Pokemon():
         self.type = type
         self.attacks = []
         
+    def __str__(self):
+        return self.name
+        
     def use_attack(self, attack, target):
         attack = self.attacks[attack]
         target.life -= attack.damage 
