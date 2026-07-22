@@ -22,16 +22,30 @@ class Battle_config():
             print("Escolha qual pokemon irá batalhar:")
             for indice, pokemon in enumerate(self.player.pokemons):
                 print(indice, "-", pokemon.name)
-            escolha = int(input("Escolha: "))
-            self.player_pokemon = self.player.pokemons[escolha]
+            while True:
+                try:
+                    escolha = int(input("Escolha: "))
+                    self.player_pokemon = self.player.pokemons[escolha]
+                    break
+                except ValueError:
+                    print("Precisa ser um número dentre os mostrados!!!")
+                except IndexError:
+                    print("Este pokemon não existe!!!")  
             print(self.adversary_trainer.name, "escolheu", self.adversary_pokemon.name)
             
             ##Loop da batalha
             while self.adversary_pokemon.life > 0 and self.player_pokemon.life > 0:
                 print("Escolha seu ataque:")
                 self.player_pokemon.listar_ataques()
-                indice = int(input("Escolha:"))
-                self.player_pokemon.use_attack(indice, self.adversary_pokemon)
+                while True:
+                    try:
+                        indice = int(input("Escolha:"))
+                        self.player_pokemon.use_attack(indice, self.adversary_pokemon)
+                        break
+                    except IndexError:
+                        print("Esse ataque não existe!!!")
+                    except ValueError:
+                        print("Precisa ser um número dentre os mostrados!!!")
                     
                 if self.adversary_pokemon.life <= 0:
                     self.adversary_trainer.pokemons.pop(0)
