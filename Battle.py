@@ -30,13 +30,13 @@ class Battle_config():
                 
     def adversary_fainted(self):
         if self.adversary_pokemon.life <= 0:
-            self.adversary_trainer.pokemons.pop(0)
+            self.adversary_trainer.remove_pokemon(self.adversary_pokemon)
             return True
         return False
     
     def player_fainted(self):
         if self.player_pokemon.life <= 0:
-            self.player.pokemons.remove(self.player_pokemon)
+            self.player.remove_pokemon(self.player_pokemon)
             return True
         return False
 
@@ -46,7 +46,7 @@ class Battle_config():
         
     def choose_adversary_pokemon(self):
         if len(self.adversary_trainer.pokemons) > 0:
-            self.adversary_pokemon = self.adversary_trainer.pokemons[0]
+            self.adversary_pokemon = self.adversary_trainer.first_pokemon()
             print(self.adversary_trainer.name, "escolheu", self.adversary_pokemon.name)
             
     def choose_player_pokemon(self):
@@ -64,8 +64,9 @@ class Battle_config():
                 print("Este pokemon não existe!!!") 
         
     def battle(self):
-        self.adversary_pokemon = self.adversary_trainer.pokemons[0]
+        self.choose_adversary_pokemon()
         self.choose_player_pokemon()
+        print
         
         while self.player.pokemons and self.adversary_trainer.pokemons:
             
@@ -80,7 +81,7 @@ class Battle_config():
             self.adversary_turn()
             
             if self.player_fainted():
-                if self.player.pokemons:
+                if self.player.has_pokemons():
                     self.choose_player_pokemon()
                     continue
                 break
