@@ -1,3 +1,5 @@
+from Sistemas.Damage import calculate_damage
+
 class Pokemon():
     def __init__(self, name:str, life:int, type:str):
         self.name = name
@@ -10,10 +12,11 @@ class Pokemon():
         
     def use_attack(self, attack, target):
         attack = self.attacks[attack]
-        target.life -= attack.damage 
+        damage = calculate_damage(attack, target)
+        target.life -= damage
         if target.life < 0:
             target.life = 0
-        print(self.name, "usou", attack.name, "causando", attack.damage, "de dano em", target.name, "!!!")
+        print(self.name, "usou", attack.name, "causando", damage, "de dano em", target.name, "!!!")
         print("Vida restante:", target.life)
         if target.life == 0:
             print(target.name, "foi nocauteado!!!")
