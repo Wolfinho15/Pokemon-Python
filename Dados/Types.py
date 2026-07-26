@@ -29,12 +29,3 @@ type_effectiveness = {
     }
 }
 
-
-
-vantagens = {
-    "Fogo":type_effectiveness["Fogo"],
-    "Planta":type_effectiveness["Planta"],
-    "Água":type_effectiveness["Água"]
-}
-
-print(vantagens["Água"]["Água"])

@@ -12,7 +12,7 @@ class Pokemon():
         
     def use_attack(self, attack, target):
         attack = self.attacks[attack]
-        damage = calculate_damage(attack, target)
+        damage = calculate_damage(self, attack, target)
         target.life -= damage
         if target.life < 0:
             target.life = 0
