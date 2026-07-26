@@ -79,7 +79,7 @@ class Battle_config():
                 break
             
             self.adversary_turn()
-            
+    
             if self.player_fainted():
                 if self.player.has_pokemons():
                     self.choose_player_pokemon()
