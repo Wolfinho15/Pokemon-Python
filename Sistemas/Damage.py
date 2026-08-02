@@ -1,15 +1,21 @@
 from Dados.Types import type_effectiveness
+import random
+from Classes.Pokemon import Pokemon
+from Classes.Moves import Moves
 
-def calculate_damage(pokemon, attack, target):
-    type_multiplier = type_effectiveness.get(attack.type, {}).get(target.type, 1)
-    stab_multiplier = 1
-    if pokemon.type == attack.type:
-        stab_multiplier = 1.5
+CRITICAL_DAMAGE = 1.5
+STAB_MULTIPLIER = 1.5
+
+def critical(crit_rate:float) -> bool:
+    return random.random() < crit_rate
+
+def calculate_damage(attacker:Pokemon, move:Moves, defender:Pokemon) -> int:
+    type_multiplier = type_effectiveness.get(move.type, {}).get(defender.type, 1)
         
-    damage = int(attack.damage * type_multiplier * stab_multiplier)  
+    damage:float = move.damage 
+    damage *= type_multiplier
+    damage *= STAB_MULTIPLIER if attacker.type == move.type else 1
+    damage *= CRITICAL_DAMAGE if critical(attacker.crit_rate) else 1  
+    damage *= attacker.attack / defender.defense
     
-    print("Dano base:", attack.damage)
-    print("Multiplicador de tipo:", type_multiplier)
-    print("STAB:", stab_multiplier)
-    print("Dano final:", damage)
-    return damage
+    return int(damage)

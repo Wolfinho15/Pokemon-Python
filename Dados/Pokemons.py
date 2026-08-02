@@ -1,41 +1,71 @@
 from Classes.Pokemon import Pokemon
-from Dados import Attacks
-pikachu = Pokemon("Pikachu", 100, "Elétrico")
-pikachu.learn_attack(Attacks.choque_do_trovao)
-pikachu.learn_attack(Attacks.cauda_de_ferro)
-pikachu.learn_attack(Attacks.investida)
-
-charizard = Pokemon("Charizard", 180, "Fogo")
-charizard.learn_attack(Attacks.lanca_chamas)
-charizard.learn_attack(Attacks.garra_de_aco)
-charizard.learn_attack(Attacks.asa_de_aco)
-charizard.learn_attack(Attacks.explosao_de_fogo)
-
-blastoise = Pokemon("Blastoise", 200, "Água")
-blastoise.learn_attack(Attacks.hidro_bomba)
-blastoise.learn_attack(Attacks.jato_dagua)
-blastoise.learn_attack(Attacks.mordida)
-blastoise.learn_attack(Attacks.investida)
-
-venusaur = Pokemon("Venusaur", 190, "Planta")
-venusaur.learn_attack(Attacks.chicote_de_vinha)
-venusaur.learn_attack(Attacks.folha_navalha)
-venusaur.learn_attack(Attacks.raio_solar)
-venusaur.learn_attack(Attacks.investida)
-
-gengar = Pokemon("Gengar", 140, "Fantasma")
-gengar.learn_attack(Attacks.bola_sombria)
-gengar.learn_attack(Attacks.hipnose)
-gengar.learn_attack(Attacks.lambida)
-gengar.learn_attack(Attacks.sombra_noturna)
-
-Pokemons_disponiveis = [
-    pikachu,
-    charizard,
-    blastoise,
-    venusaur,
-    gengar
-]
+from Dados import Moves
 
 
+POKEMONS = {
+    "Pikachu":{
+        "life": 100,
+        "type":"Elétrico",
+        "defense":70,
+        "crit_rate":0.12,
+        "attack":95,
+        "moves":[
+            Moves.choque_do_trovao,
+            Moves.cauda_de_ferro,
+            Moves.investida
+        ]
+    },
+    "Charizard":{
+        "life":180,
+        "type":"Fogo",
+        "defense":85,
+        "crit_rate":0.10,
+        "attack":120,
+        "moves":[
+            Moves.lanca_chamas,
+            Moves.asa_de_aco,
+            Moves.explosao_de_fogo,
+            Moves.garra_de_aco
+        ]   
+    },
+    "Blastoise":{
+        "life":200,
+        "type":"Água",
+        "defense":130,
+        "crit_rate":0.06,
+        "attack":90,
+        "moves":[
+            Moves.hidro_bomba,
+            Moves.jato_dagua,
+            Moves.mordida,
+            Moves.investida
+        ]
+    },
+    "Venusaur":{
+        "life":190,
+        "type":"Planta",
+        "defense":110,
+        "crit_rate":0.08,
+        "attack":95,
+        "moves":[
+            Moves.chicote_de_vinha,
+            Moves.folha_navalha,
+            Moves.raio_solar,
+            Moves.investida
+        ]
+    },
+    "Gengar":{
+        "life":140,
+        "type":"Fantasma",
+        "defense":60,
+        "crit_rate":0.15,
+        "attack":130,
+        "moves":[
+            Moves.bola_sombria,
+            Moves.hipnose,
+            Moves.lambida,
+            Moves.sombra_noturna
+        ]
+    }
+}
 

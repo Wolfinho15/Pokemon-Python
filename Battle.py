@@ -1,7 +1,7 @@
 from Classes.Treinador import Trainer
 
-from Dados.Pokemons import Pokemons_disponiveis
-from Dados import Attacks
+from Dados.Pokemons import POKEMONS
+from Dados import Moves
 from Dados import Trainers
 import random
 
@@ -9,40 +9,40 @@ import random
 
 
 class Battle_config():
-    def __init__(self, player, adversary_trainer):
+    def __init__(self, player:Trainer, adversary_trainer:Trainer):
         self.player = player
         self.adversary_trainer = adversary_trainer
         self.player_pokemon = None
         self.adversary_pokemon = None
     
     def player_turn(self):
-        print("Escolha seu ataque:")
-        self.player_pokemon.listar_ataques()
+        print("Escolha seu movimento:")
+        self.player_pokemon.listar_moves()
         while True:
             try:
                 indice = int(input("Escolha:"))
-                self.player_pokemon.use_attack(indice, self.adversary_pokemon)
+                self.player_pokemon.use_move(indice, self.adversary_pokemon)
                 break
             except IndexError:
-                print("Esse ataque não existe!!!")
+                print("Esse movimento não existe!!!")
             except ValueError:
                 print("Precisa ser um número dentre os mostrados!!!")
                 
-    def adversary_fainted(self):
+    def adversary_fainted(self) -> bool:
         if self.adversary_pokemon.life <= 0:
             self.adversary_trainer.remove_pokemon(self.adversary_pokemon)
             return True
         return False
     
     def player_fainted(self):
-        if self.player_pokemon.life <= 0:
+        if self.is_fainted:
             self.player.remove_pokemon(self.player_pokemon)
             return True
         return False
 
     def adversary_turn(self):
-        indice = random.randint(0, len(self.adversary_pokemon.attacks) - 1)
-        self.adversary_pokemon.use_attack(indice, self.player_pokemon)
+        indice = random.randint(0, len(self.adversary_pokemon.moves) - 1)
+        self.adversary_pokemon.use_move(indice, self.player_pokemon)
         
     def choose_adversary_pokemon(self):
         if len(self.adversary_trainer.pokemons) > 0:
@@ -93,8 +93,7 @@ class Battle_config():
                 
 
         
-battle = Battle_config(Trainers.Ash, Trainers.Hsa)
-battle.battle()
+
         
     
         
